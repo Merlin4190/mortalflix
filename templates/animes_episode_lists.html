@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+{% static 'images' as baseUrl %}
+
+{% block content %}
+
+<!-- breadcrumb area start -->
+<section class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-area-content">
+                    <!-- <h1>{{ object.series.title }}: {{ object.title }}</h1> -->
+                    <h1>{{ object.title }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- breadcrumb area end -->
+<!-- blog area start -->
+<section class="blog-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="news-details">
+                    <div class="single-news">
+                        <div style="background: url('{{ object.anime.avatar.url }}'), url('{{ object.anime.avatar.url }}');
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        background-size: contain, cover;
+                        height: 350px;"></div>
+                        <div class="news-date">
+                            <h2><span>{{ object.anime.created_on|date:'M' }}</span> {{ object.anime.created_on|date:'d' }}</h2>
+                            <h1>{{ object.anime.created_on|date:'Y' }}</h1>
+                        </div>
+                    </div>
+                    <h2>{{ object.title }}</h2>
+                    <i class="icofont icofont-tags">
+                        {% for genre in object.anime.genres.all %}
+                        <a href="{% url 'animes:genre_list' genre.slug  %}">{{ genre.title}}{% if not forloop.last %}, {% endif %}</a>
+                        {% endfor %}
+                    </i> | <i class="icofont icofont-time" title="runtime"> <span>{{ object.anime.runtime }}</span></i> | 
+                    <a href="#"><i class="icofont icofont-comment"></i>{{ object.no_of_comments }} Comment{{ object.no_of_comments|pluralize }}</a>
+                    <p>{{ object.anime.description }}</p>
+                    <div class="text-center">
+                        <img src="{% static 'img/blog-detail.png' %}" alt="" />
+                    </div>
+                    <div class="details-reply">
+                        <h2>Episodes</h2>
+                        <ul>
+                            {% for episode in episodes %}
+                            <hr/>
+                            <li class="pt-2 pb-2">
+                                <a class="font-lite-black" href="{% url 'animes:episode' episode.slug  %}">{{ episode.title }}</a>
+                            </li>
+                            {% empty %}
+                            <p>Episodes not available here yet :(</p>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="details-thumb">
+                        {% if episodes.has_previous %}
+                        <div class="details-thumb-prev">
+                            <div class="thumb-icon">
+                                {% for episode in episodes %}
+                                <a href="/animes/episodes/{{episode.season.slug}}/?page={{ episodes.previous_page_number }}"><i class="icofont icofont-simple-left"></i></a>
+                                {% endfor %}
+                            </div>
+                            <div class="thumb-text">
+                                <h4>Previous List</h4>
+                                <p>Page {{ episodes.number }} of {{ episodes.paginator.num_pages }}.</p>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="details-thumb-prev">
+                            <div class="thumb-icon"></div>
+                        </div>
+                        {% endif %}
+                        {% if episodes.has_next %}
+                        <div class="details-thumb-next">
+                            <div class="thumb-text">
+                                <h4>Next List</h4>
+                                <p>Page {{ episodes.number }} of {{ episodes.paginator.num_pages }}.</p>
+                            </div>
+                            <div class="thumb-icon">
+                                {% for episode in episodes %}
+                                <a href="/animes/episodes/{{episode.season.slug}}/?page={{ episodes.next_page_number }}"><i class="icofont icofont-simple-right"></i></a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="details-thumb-next">
+                            <div class="thumb-icon"></div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- blog area end -->
+
+
+{% endblock content %}

@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+{% static 'images' as baseUrl %}
+
+{% block content %}
+
+<!-- breadcrumb area start -->
+<section class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-area-content">
+                    <!-- <h1>{{ object.series.title }}: {{ object.title }}</h1> -->
+                    <h1>{{ object.title }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- breadcrumb area end -->
+<!-- blog area start -->
+<section class="blog-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="news-details">
+                    <div class="single-news">
+                        <div style="background: url('{{ object.series.avatar.url }}'), url('{{ object.series.avatar.url }}');
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        background-size: contain, cover;
+                        height: 350px;"></div>
+                        <div class="news-date">
+                            <h2><span>{{ object.series.created_on|date:'M' }}</span> {{ object.series.created_on|date:'d' }}</h2>
+                            <h1>{{ object.series.created_on|date:'Y' }}</h1>
+                        </div>
+                    </div>
+                    <h2>{{ object.title }}</h2>
+                    <i class="icofont icofont-tags">
+                        {% for genre in object.series.genres.all %}
+                        <a href="{% url 'tvseries:genre_list' genre.slug  %}">{{ genre.title}}{% if not forloop.last %}, {% endif %}</a>
+                        {% endfor %}
+                    </i> | <i class="icofont icofont-time" title="runtime"> <span>{{ object.series.runtime }}</span></i> |
+                    <a href="#comments"><i class="icofont icofont-comment"></i>{{ comments.count }} Comment{{comments.count|pluralize}}</a>
+                    <!-- <a href="#"><i class="icofont icofont-comment"></i>1k Comments</a> -->
+                    <p>{{ object.series.description }}</p>
+                  
+                    <div class="details-reply">
+                        <h2>Download Formats</h2>
+                        <ul>
+                            {% for ep in episode %}
+                            <hr/>
+                            <li class="pt-2 pb-2"><a class="font-lite-black" href="{{ep.link}}">{{ ep.title }}</a></li>
+                            {% empty %}
+                            <p>Download link(s) not available here yet :(</p>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="pb-5"></div>
+                    <div class="text-center">
+                        <img src="{% static 'img/blog-detail.png' %}" alt="" />
+                    </div>
+
+                    {% for comment in comments.all %}
+                    <div class="detail-author" id="comments">
+                        <div class="row flexbox-center">
+                            <div class="col-lg-12 text-lg-left text-center">
+                                <div class="details-author">
+                                    <h4>{{ comment.name }}</h4>
+                                    {{ comment.content | linebreaks }}
+                                </div>
+                            </div>
+                            <div class="col-lg-12 text-lg-right text-center">
+                                <div class="details-author">
+                                    <h4>{{ comment.created_on }}</h4>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                        <div class="detail-author" id="comments"><p>No comments here yet :(</p></div>
+                    {% endfor %}
+
+                    <div class="details-reply">
+                        <h2>Leave your Comment</h2>
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="select-container">
+                                        <input type="text" placeholder="Name" name="name"/>
+                                        <i class="icofont icofont-ui-user"></i>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="select-container">
+                                        <input type="text" placeholder="Email" name="email"/>
+                                        <i class="icofont icofont-envelope"></i>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="select-container">
+                                        <input type="text" placeholder="Phone" name="phone"/>
+                                        <i class="icofont icofont-phone"></i>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="textarea-container">
+                                        <textarea placeholder="Type Here Message" name="content"></textarea>
+                                        <button><i class="icofont icofont-send-mail"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details-comment">
+                                <!-- <a class="theme-btn theme-btn2" href="#">Post Comment</a> -->
+                                <button class="theme-btn theme-btn2" type="submit">Post Comment</button>
+                                <!-- <p>You may use these HTML tags and attributes: You may use these HTML tags and attributes: You may use these HTML tags and attributes: </p> -->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- blog area end -->
+
+
+{% endblock content %}

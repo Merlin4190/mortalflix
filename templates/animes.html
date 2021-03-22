@@ -1,0 +1,274 @@
+{% extends 'base.html' %}
+{% load static %}
+{% static 'images' as baseUrl %}
+
+{% block content %}
+
+<!-- hero area start -->
+<section class="hero-area" id="home">
+    <div class="container">
+        <div class="hero-area-slider">
+            {% for episode in episodes %}
+            <div class="row hero-area-slide">
+                <div class="col-lg-6 col-md-5">
+                    <a href="{{ episode.anime.get_absolute_url }}">
+                        <div class="hero-area-content">                            
+                            <img src="{{ episode.anime.avatar.url }}" alt="about" />                            
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-6 col-md-7">
+                    <div class="hero-area-content pr-50">
+                        <a href="{{ episode.anime.get_absolute_url }}"><h2>{{ episode.anime.title }}</h2></a>
+                        <div class="review">
+                            <i class="icofont icofont-tags">
+                                {% for genre in episode.anime.genres.all %}
+                                <a href="{% url 'animes:genre_list' genre.slug  %}">{{ genre.title}}{% if not forloop.last %}, {% endif %}</a>
+                                {% endfor %}
+                            </i>
+                        </div>
+                        <p>{{ episode.anime.description|safe|slice:":200"  }}...</p>
+                        {% for cast in episode.anime.casts.all %}
+                        <h3>Cast:</h3>
+                        <div class="slide-cast">                            
+                            <div class="single-slide-cast">
+                                <img src="{{ cast.imagelink }}" alt="about" title="{{ cast.name }}" style="object-fit: scale-down;"/>
+                            </div>
+                        </div>
+                        {% empty %}
+                            
+                        {% endfor %}
+                        <div class="slide-trailor">
+                            <h3>{{ episode.title|safe|slice:":20" }}...</h3>
+                            <a class="theme-btn theme-btn2" href="{% url 'animes:episode' episode.slug  %}"><i class="icofont icofont-download"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p>No New Episodes :(</p>
+            {% endfor %}
+            <div></div>
+        </div>
+        <div class="hero-area-thumb">
+            <div class="thumb-prev">
+                <div class="row hero-area-slide">
+                    <div class="col-lg-6">
+                        <div class="hero-area-content">
+                            <!-- <h1 class="mt-5 icofont icofont-ui-previous"></h1> -->
+                            <img src="{% static 'img/slide3.png' %}" alt="about" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="hero-area-content pr-50">
+                            <h2>Last Avatar</h2>
+                            <div class="review">
+                                <div class="author-review">
+                                    <i class="icofont icofont-star"></i>
+                                    <i class="icofont icofont-star"></i>
+                                    <i class="icofont icofont-star"></i>
+                                    <i class="icofont icofont-star"></i>
+                                    <i class="icofont icofont-star"></i>
+                                </div>
+                                <h4>180k voters</h4>
+                            </div>
+                            <p></p>
+                            <h3>Cast:</h3>
+                            <div class="slide-cast">
+                                <div class="single-slide-cast">
+                                    <img src="{% static 'img/cast/cast1.png' %}" alt="about" />
+                                </div>
+                                <div class="single-slide-cast">
+                                    <img src="{% static 'img/cast/cast2.html' %}" alt="about" />
+                                </div>
+                                <div class="single-slide-cast">
+                                    <img src="{% static 'img/cast/cast3.png' %}" alt="about" />
+                                </div>
+                                <div class="single-slide-cast">
+                                    <img src="{% static 'img/cast/cast4.png' %}" alt="about" />
+                                </div>
+                                <div class="single-slide-cast">
+                                    <img src="{% static 'img/cast/cast5.png' %}" alt="about" />
+                                </div>
+                                <div class="single-slide-cast">
+                                    <img src="{% static 'img/cast/cast6.png' %}" alt="about" />
+                                </div>
+                                <div class="single-slide-cast">
+                                    <img src="{% static 'img/cast/cast7.png' %}" alt="about" />
+                                </div>
+                                <div class="single-slide-cast text-center">
+                                    5+
+                                </div>
+                            </div>
+                            <div class="slide-trailor">
+                                <h3>Watch Trailer</h3>
+                                <a class="theme-btn theme-btn2" href="#"><i class="icofont icofont-play"></i> Tickets</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="thumb-next">
+                <div class="row hero-area-slide">
+                    <div class="col-lg-6">
+                        <div class="hero-area-content">
+                            <img src="{% static 'img/slide1.png' %}" alt="about" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="hero-area-content pr-50">
+                            <h2>The Deer God</h2>
+                            <div class="review">
+                                <div class="author-review">
+                                    <i class="icofont icofont-star"></i>
+                                    <i class="icofont icofont-star"></i>
+                                    <i class="icofont icofont-star"></i>
+                                    <i class="icofont icofont-star"></i>
+                                    <i class="icofont icofont-star"></i>
+                                </div>
+                                <h4>180k voters</h4>
+                            </div>
+                            <p>She is a devil princess from the demon world. She grew up sheltered by her parents and doesn't really know how to be evil or any of the common actions,   She is unable to cry due to Keita's accidental first wish, despite needed for him to wish...</p>
+                            <h3>Cast:</h3>
+                            <div class="slide-cast">
+                                <div class="single-slide-cast">
+                                    <img src="{% static 'img/cast/cast1.png' %}" alt="about" />
+                                </div>
+                                <div class="single-slide-cast">
+                                    <img src="{% static 'img/cast/cast2.html' %}" alt="about" />
+                                </div>
+                                <div class="single-slide-cast">
+                                    <img src="{% static 'img/cast/cast3.png' %}" alt="about" />
+                                </div>
+                                <div class="single-slide-cast">
+                                    <img src="{% static 'img/cast/cast4.png' %}" alt="about" />
+                                </div>
+                                <div class="single-slide-cast">
+                                    <img src="{% static 'img/cast/cast5.png' %}" alt="about" />
+                                </div>
+                                <div class="single-slide-cast">
+                                    <img src="{% static 'img/cast/cast6.png' %}" alt="about" />
+                                </div>
+                                <div class="single-slide-cast">
+                                    <img src="{% static 'img/cast/cast7.png' %}" alt="about" />
+                                </div>
+                                <div class="single-slide-cast text-center">
+                                    5+
+                                </div>
+                            </div>
+                            <div class="slide-trailor">
+                                <h3>Watch Trailer</h3>
+                                <a class="theme-btn theme-btn2" href="#"><i class="icofont icofont-play"></i> Tickets</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- hero area end -->
+<!-- portfolio section start -->
+<section class="portfolio-area pt-60">
+    <div class="container">
+        <div class="row flexbox-center">
+            <div class="col-lg-6 text-center text-lg-left">
+                <div class="section-title">
+                    <h1><i class="icofont icofont-movie"></i> Series Lists</h1>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="portfolio-menu">
+                    <ul>
+                        <li data-filter=".L" class="active">Latest</li>
+                        <li data-filter=".S">Coming Soon</li>
+                        <li data-filter=".T">Top Rated</li>
+                        <li data-filter=".R">Recently Released</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="listmenu">
+            <ul>
+                {% for i in alphabet %}
+                    <a href="{% url 'animes:searchlist' %}?list={{i}}" class="btn"><li class="pr-0" data-filter="">{{i}}</li></a>
+                {%endfor%}
+                <a href="{% url 'animes:searchlist' %}?list=#"><li class="pr-4" data-filter="">#</li></a>
+            </ul>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="row portfolio-item">
+                    {% for anime in object_list %}
+                    <div class="col-md-4 col-sm-6 {{ anime.label }}">
+                        <div class="single-portfolio" >
+                            <div class="single-portfolio-img">
+                                <a href="{{ anime.get_absolute_url }}" >
+                                    <img src="{{ anime.avatar.url }}" alt="portfolio" style="width: 265px; height: 425px; object-fit: fill;"/>
+                                </a>
+                            </div>
+                            <div class="portfolio-content">
+                                <a href="{{ anime.get_absolute_url }}"><h6 class="text-center">{{ anime.title }}</h6></a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% if is_paginated %}
+                <div class="details-thumb">
+                    {% if page_obj.has_previous %}
+                    <div class="details-thumb-prev">
+                        <div class="thumb-icon">
+                            <a href="/animes/?page={{ page_obj.previous_page_number }}"><i class="icofont icofont-simple-left"></i></a>
+                        </div>
+                        <div class="thumb-text">
+                            <h4>Previous List</h4>
+                            <p>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</p>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="details-thumb-prev">
+                        <div class="thumb-icon">
+                            <!-- <a href="" disabled><i class="icofont icofont-simple-left"></i></a> -->
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if page_obj.has_next %}
+                    <div class="details-thumb-next">
+                        <div class="thumb-text">
+                            <h4>Next List</h4>
+                            <p>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</p>
+                        </div>
+                        <div class="thumb-icon">
+                            <a href="/animes/?page={{ page_obj.next_page_number }}"><i class="icofont icofont-simple-right"></i></a>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="details-thumb-next">
+                        <div class="thumb-icon">
+                            <!-- <a href="" disabled><i class="icofont icofont-simple-left"></i></a> -->
+                        </div>
+                        <!-- <div class="thumb-text">
+                            <h4>Previous List</h4>
+                            <p>Standard Post With Gallery</p>
+                        </div> -->
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-lg-3 text-center text-lg-left">
+                <div class="portfolio-sidebar">
+                    <img src="{% static 'img/sidebar/sidebar1.png' %}" alt="sidebar" />
+                    <img src="{% static 'img/sidebar/sidebar2.png' %}" alt="sidebar" />
+                    <img src="{% static 'img/sidebar/sidebar3.png' %}" alt="sidebar" />
+                    <img src="{% static 'img/sidebar/sidebar4.png' %}" alt="sidebar" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- portfolio section end -->
+
+{% endblock content %}

@@ -1,0 +1,219 @@
+{% extends 'base.html' %}
+{% load static %}
+{% static 'images' as baseUrl %}
+
+{% block content %}
+
+<!-- hero area start -->
+<section class="hero-area" id="home">
+    <div class="container">
+        <br>
+        <br>
+        
+    </div>
+</section><!-- hero area end -->
+<!-- portfolio section start -->
+<section class="portfolio-area pt-60">
+    <div class="container">
+        <div class="row flexbox-center">
+            <div class="col-lg-6 text-center text-lg-left">
+                <div class="section-title">
+                    <h1><i class="icofont icofont-movie"></i> Series Lists</h1>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="portfolio-menu">
+                    <ul>
+                        <li data-filter=".L" class="active">Latest</li>
+                        <li data-filter=".S">Coming Soon</li>
+                        <li data-filter=".T">Top Rated</li>
+                        <li data-filter=".R">Recently Released</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="listmenu">
+            <ul>
+                {% for i in alphabet %}
+                    <a href="{% url 'tvseries:searchlist' %}?list={{i}}" class="btn"><li class="pr-0" data-filter="">{{i}}</li></a>
+                {%endfor%}
+                <a href="{% url 'tvseries:searchlist' %}?list=#"><li class="pr-0" data-filter="">#</li></a>
+            </ul>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-lg-9">
+                {% if results %}
+                <div class="row portfolio-item">
+                    {% for result in results %}
+                    <div class="col-md-4 col-sm-6 {{ result.label }}">
+                        <div class="single-portfolio">
+                            <div class="single-portfolio-img">
+                                <a href="/series/seasons/{{ result.slug }}/" >
+                                    <img src="{{ result.avatar.url }}" alt="portfolio" style="width: 265px; height: 425px; object-fit: fill;" />
+                                </a>
+                            </div>
+                            <div class="portfolio-content">
+                                <a href="/series/seasons/{{ result.slug }}/"><h6 class="text-center">{{ result.title }}</h6></a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <h3 class="font-black text-center pt-60"><b>No results found...</b></h3>
+                {% endif %}
+            </div>
+            <div class="col-lg-3 text-center text-lg-left">
+                <div class="portfolio-sidebar">
+                    <img src="{% static 'img/sidebar/sidebar1.png' %}" alt="sidebar" />
+                    <img src="{% static 'img/sidebar/sidebar2.png' %}" alt="sidebar" />
+                    <img src="{% static 'img/sidebar/sidebar3.png' %}" alt="sidebar" />
+                    <img src="{% static 'img/sidebar/sidebar4.png' %}" alt="sidebar" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- portfolio section end -->
+<!-- video section start -->
+<section class="video ptb-90">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title pb-20">
+                    <h1><i class="icofont icofont-film"></i> Trailers & Videos</h1>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-9">
+                <div class="video-area">
+                    <img src="{% static 'img/video/video1.png' %}" alt="video" />
+                    <a href="https://www.youtube.com/watch?v=RZXnugbhw_4" class="popup-youtube">
+                        <i class="icofont icofont-ui-play"></i>
+                    </a>
+                    <div class="video-text">
+                        <h2>Angle of Death</h2>
+                        <div class="review">
+                            <div class="author-review">
+                                <i class="icofont icofont-star"></i>
+                                <i class="icofont icofont-star"></i>
+                                <i class="icofont icofont-star"></i>
+                                <i class="icofont icofont-star"></i>
+                                <i class="icofont icofont-star"></i>
+                            </div>
+                            <h4>180k voters</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-12 col-sm-6">
+                        <div class="video-area">
+                            <img src="{% static 'img/video/video2.png' %}" alt="video" />
+                            <a href="https://www.youtube.com/watch?v=RZXnugbhw_4" class="popup-youtube">
+                                <i class="icofont icofont-ui-play"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-6">
+                        <div class="video-area">
+                            <img src="{% static 'img/video/video3.png' %}" alt="video" />
+                            <a href="https://www.youtube.com/watch?v=RZXnugbhw_4" class="popup-youtube">
+                                <i class="icofont icofont-ui-play"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- video section end -->
+<!-- news section start -->
+<section class="news">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title pb-20">
+                    <h1><i class="icofont icofont-coffee-cup"></i> Latest News</h1>
+                </div>
+            </div>
+        </div>
+        <hr />
+    </div>
+    <div class="news-slide-area">
+        <div class="news-slider">
+            <div class="single-news">
+                <div class="news-bg-1"></div>
+                <div class="news-date">
+                    <h2><span>NOV</span> 25</h2>
+                    <h1>2017</h1>
+                </div>
+                <div class="news-content">
+                    <h2>The Witch Queen</h2>
+                    <p>Witch Queen is a tall woman with a slim build. She has pink hair, which is pulled up under her hat, and teal eyes.</p>
+                </div>
+                <a href="#">Read More</a>
+            </div>
+            <div class="single-news">
+                <div class="news-bg-2"></div>
+                <div class="news-date">
+                    <h2><span>NOV</span> 25</h2>
+                    <h1>2017</h1>
+                </div>
+                <div class="news-content">
+                    <h2>The Witch Queen</h2>
+                    <p>Witch Queen is a tall woman with a slim build. She has pink hair, which is pulled up under her hat, and teal eyes.</p>
+                </div>
+                <a href="#">Read More</a>
+            </div>
+            <div class="single-news">
+                <div class="news-bg-3"></div>
+                <div class="news-date">
+                    <h2><span>NOV</span> 25</h2>
+                    <h1>2017</h1>
+                </div>
+                <div class="news-content">
+                    <h2>The Witch Queen</h2>
+                    <p>Witch Queen is a tall woman with a slim build. She has pink hair, which is pulled up under her hat, and teal eyes.</p>
+                </div>
+                <a href="#">Read More</a>
+            </div>
+        </div>
+        <div class="news-thumb">
+            <div class="news-next">
+                <div class="single-news">
+                    <div class="news-bg-3"></div>
+                    <div class="news-date">
+                        <h2><span>NOV</span> 25</h2>
+                        <h1>2017</h1>
+                    </div>
+                    <div class="news-content">
+                        <h2>The Witch Queen</h2>
+                        <p>Witch Queen is a tall woman with a slim build. She has pink hair, which is pulled up under her hat, and teal eyes.</p>
+                    </div>
+                    <a href="#">Read More</a>
+                </div>
+            </div>
+            <div class="news-prev">
+                <div class="single-news">
+                    <div class="news-bg-2"></div>
+                    <div class="news-date">
+                        <h2><span>NOV</span> 25</h2>
+                        <h1>2017</h1>
+                    </div>
+                    <div class="news-content">
+                        <h2>The Witch Queen</h2>
+                        <p>Witch Queen is a tall woman with a slim build. She has pink hair, which is pulled up under her hat, and teal eyes.</p>
+                    </div>
+                    <a href="#">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- news section end -->
+
+{% endblock content %}

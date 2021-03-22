@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+{% static 'images' as baseUrl %}
+
+{% block content %}
+
+<!-- breadcrumb area start -->
+<section class="breadcrumb-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-area-content">
+                    <h1>{{ object.title }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- breadcrumb area end -->
+<!-- blog area start -->
+<section class="blog-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="news-details">
+                    <div class="single-news">
+                        <div style="background: url('{{ object.avatar.url }}'), url('{{ object.avatar.url }}');
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        background-size: contain, cover;
+                        height: 350px;"></div>
+                        <div class="news-date">
+                            <h2><span>{{ object.created_on|date:'M' }}</span> {{ object.created_on|date:'d' }}</h2>
+                            <h1>{{ object.created_on|date:'Y' }}</h1>
+                        </div>
+                    </div>
+                    <h2>{{ object.title }}</h2>
+                    <i class="icofont icofont-tags">
+                        {% for genre in object.genres.all %}
+                        <a href="{% url 'tvseries:genre_list' genre.slug  %}">{{ genre.title}}{% if not forloop.last %}, {% endif %}</a>
+                        {% endfor %}
+                    </i> | <i class="icofont icofont-time" title="runtime"> <span>{{ object.runtime }}</span></i> | 
+                    <a href="#"><i class="icofont icofont-comment"></i>{{ object.no_of_comments }} Comment{{ object.no_of_comments|pluralize }}</a>
+                    <!-- <a href="#"><i class="icofont icofont-tags"></i>{{ object.genre }}</a> -->
+                    <!-- <a href="#"><i class="icofont icofont-comment"></i>1k Comments</a> -->
+                    <p>{{ object.description }}</p>
+                    <!-- <div class="detail-author">
+                        <div class="row flexbox-center">
+                            <div class="col-lg-6 text-lg-left text-center">
+                                <div class="details-author">
+                                    <h4>By Admin:</h4>
+                                    <img src="assets/img/author.png" alt="" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6 text-lg-right text-center">
+                                <div class="details-author">
+                                    <h4>Share:</h4>
+                                    <a href="#"><i class="icofont icofont-social-facebook"></i></a>
+                                    <a href="#"><i class="icofont icofont-social-twitter"></i></a>
+                                    <a href="#"><i class="icofont icofont-social-pinterest"></i></a>
+                                    <a href="#"><i class="icofont icofont-social-linkedin"></i></a>
+                                    <a href="#"><i class="icofont icofont-social-google-plus"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="text-center">
+                        <img src="assets/img/blog-detail.png" alt="" />
+                    </div>
+                    <div class="details-reply">
+                        <h2>Seasons</h2>
+                        <ul>
+                            {% for season in seasons %}
+                            <hr/>
+                            <li class="pt-2 pb-2">
+                                <a class="font-lite-black" href="{% url 'tvseries:episodes' season.slug  %}">{{ season.title }}</a>
+                            </li>
+                            {% empty %}
+                            <p>Seasons not available here yet :(</p>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <!-- <div class="details-comment">
+                        <a class="theme-btn theme-btn2" href="#">Post Comment</a>
+                        <p>You may use these HTML tags and attributes: You may use these HTML tags and attributes: You may use these HTML tags and attributes: </p>
+                    </div> -->
+                    
+                    <div class="details-thumb">
+                        {% if seasons.has_previous %}
+                        <div class="details-thumb-prev">
+                            <div class="thumb-icon">
+                                {% for season in seasons %}
+                                <a href="/series/seasons/{{ season.series.slug }}/?page={{ seasons.previous_page_number }}"><i class="icofont icofont-simple-left"></i></a>
+                                {% endfor %}
+                            </div>
+                            <div class="thumb-text">
+                                <h4>Previous List</h4>
+                                <p>Page {{ seasons.number }} of {{ seasons.paginator.num_pages }}.</p>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="details-thumb-prev">
+                            <div class="thumb-icon"></div>
+                        </div>
+                        {% endif %}
+                        {% if seasons.has_next %}
+                        <div class="details-thumb-next">
+                            <div class="thumb-text">
+                                <h4>Next List</h4>
+                                <p>Page {{ seasons.number }} of {{ seasons.paginator.num_pages }}.</p>
+                            </div>
+                            <div class="thumb-icon">
+                                {% for season in seasons %}
+                                <a href="/series/seasons/{{season.series.slug}}/?page={{ seasons.next_page_number }}"><i class="icofont icofont-simple-right"></i></a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="details-thumb-next">
+                            <div class="thumb-icon"></div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- blog area end -->
+
+
+{% endblock content %}

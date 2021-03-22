@@ -1,0 +1,24 @@
+{% load static %}
+
+<!-- jquery main JS -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<!-- Bootstrap JS -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<!-- Slick nav JS -->
+<script src="{% static 'js/jquery.slicknav.min.js' %}"></script>
+<!-- owl carousel JS -->
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<!-- Popup JS -->
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+<!-- Isotope JS -->
+<script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+<!-- main JS -->
+<script src="{% static 'js/main.js' %}"></script>
+
+{% for series in object_list %}
+<script  type="text/javascript">
+    $("a.ad_link").on("click",function(){
+        window.open("{{ series.adlink }},"_blank');
+    });
+</script>
+{% endfor %}

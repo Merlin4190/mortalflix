@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+{% load static %}
+{% static 'images' as baseUrl %}
+
+{% block content %}
+		<!-- breadcrumb area start -->
+		<section class="breadcrumb-area">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="breadcrumb-area-content">
+							<h1>{{ object.title }}</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section><!-- breadcrumb area end -->
+		<!-- transformers area start -->
+		<section class="transformers-area">
+			<div class="container">
+				<div class="transformers-box">
+					<div class="row flexbox-center">
+						<div class="col-lg-5 text-lg-left text-center">
+							<div class="transformers-content">
+								<img src="{{ object.avatar.url }}" alt="about" />
+							</div>
+						</div>
+						<div class="col-lg-7">
+							<div class="transformers-content">
+								<h2>{{ object.title }}</h2>
+								<p>
+									{% for genre in object.genres.all %}
+									<a href="{% url 'movies:genre_list' genre.slug  %}">{{ genre.title}}{% if not forloop.last %} | {% endif %}</a>
+									{% endfor %} | <a href="#comments"><i class="icofont icofont-comment"></i>{{ object.no_of_comments }} Comment{{ object.no_of_comments|pluralize }}</a>
+								</p>
+								<ul>
+									<!-- <li>
+										<div class="transformers-left">
+											Movie:
+										</div>
+										<div class="transformers-right">
+											<a href="#">Sci-Fic</a>
+										</div>
+									</li> -->
+									<li>
+										<div class="transformers-left">
+											Writer:
+										</div>
+										<div class="transformers-right">
+											{{ object.writer }}
+										</div>
+									</li>
+									<li>
+										<div class="transformers-left">
+											Director:
+										</div>
+										<div class="transformers-right">
+											{{ object.writer }}
+										</div>
+									</li>
+									<li>
+										<div class="transformers-left">
+											Time: 
+										</div>
+										<div class="transformers-right">
+											{{ object.runtime }}
+										</div>
+									</li>
+									<li>
+										<div class="transformers-left">
+											Release:
+										</div>
+										<div class="transformers-right">
+											{{ object.year }}
+										</div>
+									</li>
+									<li>
+										<div class="transformers-left">
+											Language:
+										</div>
+										<div class="transformers-right">
+											{{ object.language }}
+										</div>
+									</li>
+									<li>
+										<div class="transformers-left">
+											Download Links:
+										</div>
+										<div class="transformers-right">
+											<!-- HB Movies  |  HW Town <a href="#" class="theme-btn">Movies House</a>Grand Seats  |  HB Max -->
+											<!-- <div class="transformers-bottom"> -->
+												{% for download in downloads %}
+													<a href="{{download.link}}" class="theme-btn"><i class="icofont icofont-download"></i> {{ download.title|safe|slice:"15"  }}</a>				
+												{% empty %}
+												<p>Download link(s) not available here yet :(</p>
+												{% endfor %}
+											<!-- </div> -->
+											
+										</div>
+									</li>
+									<li>
+										<div class="transformers-left">
+											Share:
+										</div>
+										<div class="transformers-right">
+											<a href="#"><i class="icofont icofont-social-facebook"></i></a>
+											<a href="#"><i class="icofont icofont-social-twitter"></i></a>
+											<a href="#"><i class="icofont icofont-social-google-plus"></i></a>
+											<a href="#"><i class="icofont icofont-youtube-play"></i></a>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</section><!-- transformers area end -->
+		<!-- details area start -->
+		<section class="details-area">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-9">
+						<div class="details-content">
+							<div class="details-overview">
+								<h2>Overview</h2>
+								<p>{{ object.description }}</p>
+							</div>
+
+							{% for comment in comments.all %}
+							<div class="detail-author" id="comments">
+								<div class="row flexbox-center">
+									<div class="col-lg-12 text-lg-left text-center">
+										<div class="details-author">
+											<h4>{{ comment.name }}</h4>
+											{{ comment.content | linebreaks }}
+										</div>
+									</div>
+									<div class="col-lg-12 text-lg-right text-center">
+										<div class="details-author">
+											<h4>{{ comment.created_on }}</h4>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+							{% empty %}
+							<div class="detail-author" id="comments"><p>No comments here yet :(</p></div>
+							{% endfor %}
+							
+							<div class="details-reply">
+								<h2>Leave your Comment</h2>
+								<form action="" method="POST">
+									{% csrf_token %}
+									<div class="row">
+										<div class="col-lg-4">
+											<div class="select-container">
+												<input type="text" placeholder="Name" name="name"/>
+												<i class="icofont icofont-ui-user"></i>
+											</div>
+										</div>
+										<div class="col-lg-4">
+											<div class="select-container">
+												<input type="text" placeholder="Email" name="email"/>
+												<i class="icofont icofont-envelope"></i>
+											</div>
+										</div>
+										<div class="col-lg-4">
+											<div class="select-container">
+												<input type="text" placeholder="Phone" name="phone"/>
+												<i class="icofont icofont-phone"></i>
+											</div>
+										</div>
+										<div class="col-lg-12">
+											<div class="textarea-container">
+												<textarea placeholder="Type Here Message" name="content"></textarea>
+												<button><i class="icofont icofont-send-mail"></i></button>
+											</div>
+										</div>
+									</div>
+									<div class="details-comment">
+										<!-- <a class="theme-btn theme-btn2" href="#">Post Comment</a> -->
+										<button class="theme-btn theme-btn2" type="submit">Post Comment</button>
+										<!-- <p>You may use these HTML tags and attributes: You may use these HTML tags and attributes: You may use these HTML tags and attributes: </p> -->
+									</div>
+								</form>
+							</div>														
+						</div>
+					</div>
+					<div class="col-lg-3 text-center text-lg-left">
+					    <div class="portfolio-sidebar">
+							<img src="{% static 'img/sidebar/sidebar1.png' %}" alt="sidebar" />
+							<img src="{% static 'img/sidebar/sidebar2.png' %}" alt="sidebar" />
+							<img src="{% static 'img/sidebar/sidebar4.png' %}" alt="sidebar" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</section><!-- details area end -->
+{% endblock content %}
