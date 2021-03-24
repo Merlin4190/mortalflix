@@ -46,10 +46,15 @@
                 </div>
             </div>
             {% empty %}
-            <p>No New Episodes :(</p>
+            <div class="row hero-area-slide">
+                <div class="col-lg-12">
+                    <h3 class="font-black text-center pb-20"><b>No New Episodes...</b></h3>
+                </div>
+            </div>
             {% endfor %}
             <div></div>
         </div>
+        {% for episode in episodes %}
         <div class="hero-area-thumb">
             <div class="thumb-prev">
                 <div class="row hero-area-slide">
@@ -165,6 +170,9 @@
                 </div>
             </div>
         </div>
+        {% empty %}
+        <div class="hero-area-thumb"></div>
+        {% endfor %}
     </div>
 </section><!-- hero area end -->
 <!-- portfolio section start -->
@@ -213,6 +221,10 @@
                                 
                             </div>
                         </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-lg-12">
+                        <h3 class="font-black text-center pt-60"><b>No Anime Available...</b></h3>
                     </div>
                     {% endfor %}
                 </div>

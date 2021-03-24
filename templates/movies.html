@@ -45,9 +45,16 @@
                     </div>
                 </div>
             </div>
+            {% empty %}
+            <div class="row hero-area-slide">
+                <div class="col-lg-12">
+                    <h3 class="font-black text-center pb-20"><b>No New Movies...</b></h3>
+                </div>
+            </div>
             {% endfor %}
             <div></div>
         </div>
+        {% for movie in movies %}
         <div class="hero-area-thumb">
             <div class="thumb-prev">
                 <div class="row hero-area-slide">
@@ -162,6 +169,9 @@
                 </div>
             </div>
         </div>
+        {% empty %}
+        <div class="hero-area-thumb"></div>
+        {% endfor %}
     </div>
 </section><!-- hero area end -->
 <!-- portfolio section start -->
@@ -209,6 +219,10 @@
                                 <a href="{{ movies.get_absolute_url }}"><h6 class="text-center">{{ movies.title }}</h6></a>
                             </div>
                         </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-lg-12">
+                        <h3 class="font-black text-center pt-60"><b>No Movie Available...</b></h3>
                     </div>
                     {% endfor %}
                 </div>

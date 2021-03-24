@@ -3,10 +3,16 @@ from django.shortcuts import reverse
 
 # Create your models here.
 CATEGORY = (
-    ('J', 'Japanese'),
-    # ('G', 'Gollywood'),
+    ('B', 'Bollywood'),
+    ('C', 'Chinese'),
+    ('F', 'French'),
+    ('G', 'German'),
+    ('Go', 'Gollywood'),
     ('H', 'Hollywood'),
-    # ('N', 'Nollywood')
+    ('J', 'Japanese'),
+    ('K', 'Korean'),
+    ('N', 'Nollywood'),
+    ('S', 'Spanish')
 )
 
 LABEL = (
