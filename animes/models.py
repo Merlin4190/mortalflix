@@ -142,17 +142,18 @@ class Download(models.Model) :
 
   def __str__(self):
     return self.title
-'''
-class Cast(models.Model):
-  anime = models.ForeignKey(Anime, on_delete=models.CASCADE, related_name='casts')
-  name= models.CharField(max_length=200)
+
+class Trailer(models.Model):
+  title= models.CharField(max_length=200)
   imagelink = models.URLField(max_length=200, default="", blank=True)
+  link= models.URLField(max_length=200, unique=True)
+  release_date= models.DateField(null=True)
   created_on= models.DateTimeField(auto_now_add=True, null=True)
   updated_on= models.DateTimeField(auto_now=True, null=True)
 
   def __str__(self):
-    return self.name
-'''    
+    return self.title
+
 class Comment(models.Model) :
   anime = models.ForeignKey(Anime, on_delete=models.CASCADE)
   season = models.ForeignKey(Season, on_delete=models.CASCADE)

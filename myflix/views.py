@@ -11,9 +11,9 @@ from django.views.generic import ListView, DetailView, View, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
-from tvseries.models import Series
-from animes.models import Anime
-from movies.models import Movie
+from tvseries.models import Series, Trailer as STrailer
+from animes.models import Anime, Trailer as ATrailer
+from movies.models import Movie, Trailer as MTrailer
 
 alphabet = string.ascii_uppercase
 
@@ -28,8 +28,11 @@ class HomeView(ListView):
 
     def get_context_data(self,*args, **kwargs): 
         context = super(HomeView, self).get_context_data(*args,**kwargs) 
-        # context['movies']= Movie.objects.order_by('-year')[:10]
+        context['animes']= Anime.objects.order_by('-created_on')[:10]
         context['series']= Series.objects.order_by('-created_on')[:10]
+        context['mtrailers']= MTrailer.objects.order_by('-created_on')[:1]
+        context['atrailers']= ATrailer.objects.order_by('-created_on')[:1]
+        context['strailers']= STrailer.objects.order_by('-created_on')[:1]
 
         list_movies = Movie.objects.all()
         paginator = Paginator(list_movies, self.paginate_by)
@@ -210,7 +213,7 @@ def search_abc_list(request):
 
             else:
                 
-                lookups= Q(title__regex =r'^\d[\w\d _-]+')
+                lookups= Q(title__regex =r'^[a-zA-Z].*$')
                 # lookups= Q(title__startswith = 2)
 
                 results= Series.objects.filter(lookups).distinct()

@@ -26,7 +26,7 @@ SECRET_KEY = '-fk-(h6o4bhc+)k4523)wxi#k!*as@6=*^vk^kxx_&pkq+mk72'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mortalflix.herokuapp.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition

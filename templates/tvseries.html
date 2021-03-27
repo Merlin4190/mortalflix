@@ -312,7 +312,7 @@
     </div>
 </section><!-- portfolio section end -->
 <!-- video section start -->
-<!-- <section class="video ptb-90">
+<section class="video ptb-90">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -323,50 +323,23 @@
         </div>
         <hr />
         <div class="row">
-            <div class="col-md-9">
-                <div class="video-area">
-                    <img src="{% static 'img/video/video1.png' %}" alt="video" />
-                    <a href="https://www.youtube.com/watch?v=RZXnugbhw_4" class="popup-youtube">
-                        <i class="icofont icofont-ui-play"></i>
-                    </a>
-                    <div class="video-text">
-                        <h2>Angle of Death</h2>
-                        <div class="review">
-                            <div class="author-review">
-                                <i class="icofont icofont-star"></i>
-                                <i class="icofont icofont-star"></i>
-                                <i class="icofont icofont-star"></i>
-                                <i class="icofont icofont-star"></i>
-                                <i class="icofont icofont-star"></i>
-                            </div>
-                            <h4>180k voters</h4>
-                        </div>
+            <div class="col-md-12">
+                <div class="video-slider mt-20">
+                    {% for trailer in strailers %}
+                    <div class="video-area">
+                        <img src="{{ trailer.imagelink }}" alt="video" />
+                        <a href="{{ trailer.link }}" class="popup-youtube">
+                            <i class="icofont icofont-ui-play"></i>
+                        </a>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="row">
-                    <div class="col-md-12 col-sm-6">
-                        <div class="video-area">
-                            <img src="{% static 'img/video/video2.png' %}" alt="video" />
-                            <a href="https://www.youtube.com/watch?v=RZXnugbhw_4" class="popup-youtube">
-                                <i class="icofont icofont-ui-play"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-sm-6">
-                        <div class="video-area">
-                            <img src="{% static 'img/video/video3.png' %}" alt="video" />
-                            <a href="https://www.youtube.com/watch?v=RZXnugbhw_4" class="popup-youtube">
-                                <i class="icofont icofont-ui-play"></i>
-                            </a>
-                        </div>
-                    </div>
+                    {% empty %}
+                    <h3 class="font-black text-center pb-20"><b>No New Trailers...</b></h3>
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </div>
-</section>video section end -->
+</section><!-- video section end -->
 <!-- news section start -->
 <!-- <section class="news">
     <div class="container">

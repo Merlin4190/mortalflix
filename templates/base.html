@@ -7,7 +7,7 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Moviepoint - Online Movie,Vedio and TV Show HTML Template</title>
+		<title>Mortalflix - Online Movie, Video, Anime, TV  Series and Shows Download</title>
 		<!-- Favicon Icon -->
 		<link rel="icon" type="image/png" href="{% static 'img/favcion.png' %}" />
 		<!-- Bootstrap CSS -->
@@ -37,7 +37,27 @@
 			<div class="container">
 				<div class="header-area">
 					<div class="logo">
-						<a href="/"><img src="{% static 'img/logo1.png' %}" alt="logo" /></a>
+						<a href="/"><img src="{% static 'img/logo5.png' %}" alt="logo" /></a>
+					</div>
+					<div class="menu-area">
+						<div class="responsive-menu"></div>
+					    <div class="mainmenu">
+                            <ul id="primary-menu">
+                                <li><a class="active" href="/">Home</a></li>
+                                <li><a href="{% url 'movies:movies' %}">Movies</a></li>
+								<li><a href="{% url 'tvseries:series' %}">Tvseries</a></li>
+                                <!-- <li><a href="celebrities.html">CelebritiesList</a></li> -->
+                                <li><a href="{% url 'animes:series' %}">Animes</a></li>
+                                <li><a href="blog.html">News</a></li>
+								<!-- <li><a href="#">Pages <i class="icofont icofont-simple-down"></i></a>
+									<ul>
+										<li><a href="blog-details.html">Blog Details</a></li>
+										<li><a href="movie-details.html">Movie Details</a></li>
+									</ul>
+								</li> -->
+                                <!-- <li><a class="theme-btn" href="#"><i class="icofont icofont-ticket"></i> Tickets</a></li> -->
+                            </ul>
+					    </div>
 					</div>
 					<div class="header-right">
                         {% if appname == 'tvseries' %}
@@ -135,27 +155,7 @@
 							<li><a class="login-popup" href="#">Login</a></li>
 							{% endif %}
 						</ul>
-					</div>
-					<div class="menu-area">
-						<div class="responsive-menu"></div>
-					    <div class="mainmenu">
-                            <ul id="primary-menu">
-                                <li><a class="active" href="/">Home</a></li>
-                                <li><a href="{% url 'movies:movies' %}">Movies</a></li>
-								<li><a href="{% url 'tvseries:series' %}">Tvseries</a></li>
-                                <!-- <li><a href="celebrities.html">CelebritiesList</a></li> -->
-                                <li><a href="{% url 'animes:series' %}">Animes</a></li>
-                                <li><a href="blog.html">News</a></li>
-								<!-- <li><a href="#">Pages <i class="icofont icofont-simple-down"></i></a>
-									<ul>
-										<li><a href="blog-details.html">Blog Details</a></li>
-										<li><a href="movie-details.html">Movie Details</a></li>
-									</ul>
-								</li> -->
-                                <!-- <li><a class="theme-btn" href="#"><i class="icofont icofont-ticket"></i> Tickets</a></li> -->
-                            </ul>
-					    </div>
-					</div>
+					</div>					
 				</div>
 			</div>
 

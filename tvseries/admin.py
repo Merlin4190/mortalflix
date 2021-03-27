@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Series, Season, Episode, Download, Cast, Genre
+from .models import Series, Season, Episode, Download, Cast, Genre, Trailer
 
 # Register your models here.
 class CastAdmin(admin.ModelAdmin):
@@ -34,4 +34,5 @@ admin.site.register(Cast, CastAdmin)
 admin.site.register(Series, SeriesAdmin)
 admin.site.register(Season, SeasonAdmin)
 admin.site.register(Episode, EpisodeAdmin)
+admin.site.register(Trailer)
 admin.site.register(Download)

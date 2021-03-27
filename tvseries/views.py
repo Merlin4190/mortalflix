@@ -13,7 +13,8 @@ from .models import (
     Download,
     Cast,
     Genre,
-    Comment
+    Comment,
+    Trailer
 )
 
 alphabet = string.ascii_uppercase
@@ -31,6 +32,7 @@ class HomeView(ListView):
     def get_context_data(self,*args, **kwargs): 
         context = super(HomeView, self).get_context_data(*args,**kwargs) 
         context['episodes']= Episode.objects.order_by('-created_on')[:10]
+        context['strailers']= Trailer.objects.order_by('-created_on')[:8]
 
         list_series = Series.objects.all()
         paginator = Paginator(list_series, self.paginate_by)

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Anime, Season, Episode, Download, Genre
+from .models import Anime, Season, Episode, Download, Genre, Trailer
 
 # Register your models here.
 '''
@@ -31,7 +31,7 @@ class GenreAdmin(admin.ModelAdmin):
   prepopulated_fields = {'slug':('title',)}
 
 admin.site.register(Genre, GenreAdmin)
-# admin.site.register(Cast, CastAdmin)
+admin.site.register(Trailer)
 admin.site.register(Anime, AnimeAdmin)
 admin.site.register(Season, SeasonAdmin)
 admin.site.register(Episode, EpisodeAdmin)

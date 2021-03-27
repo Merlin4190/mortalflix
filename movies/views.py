@@ -1,4 +1,5 @@
 import string
+import re
 from django.conf import settings
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
@@ -11,7 +12,8 @@ from .models import (
     Download,
     Cast,
     Genre,
-    Comment
+    Comment,
+    Trailer
 )
 
 alphabet = string.ascii_uppercase
@@ -28,6 +30,7 @@ class HomeView(ListView):
     def get_context_data(self,*args, **kwargs): 
         context = super(HomeView, self).get_context_data(*args,**kwargs) 
         context['movies']= Movie.objects.order_by('-year')[:10]
+        context['mtrailers']= Trailer.objects.order_by('-created_on')[:8]
 
         list_movies = Movie.objects.all()
         paginator = Paginator(list_movies, self.paginate_by)
@@ -127,11 +130,13 @@ def search_abc_list(request):
                 return render(request, 'movies_abc_list.html', context)
 
             else:
-                
-                lookups= Q(title__regex =r'^\d[\w\d _-]+')
-                # lookups= Q(title__startswith = 2)
+                filterList = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+                query = Q()
+                for number in filterList:                
+                # lookups= Q(title__iregex=r'^/\d.*$')
+                    lookups= Q(title__startswith = number)
 
-                results= Movie.objects.filter(lookups).distinct()
+                results= Movie.objects.filter(lookups)
 
                 context={'results': results, 'movies': movies}
 
